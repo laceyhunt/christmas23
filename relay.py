@@ -7,7 +7,7 @@ RELAY_PINS = [17, 18, 27, 22, 23, 24, 25, 4]  # Adjust these pins according to y
 
 for pin in RELAY_PINS:
     GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, GPIO.LOW)
+    GPIO.output(pin, GPIO.HIGH)
 
 try:
     while True:
