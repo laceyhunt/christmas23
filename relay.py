@@ -13,9 +13,9 @@ try:
     while True:
         # Turn on each relay channel for 1 second and then turn it off
         for pin in RELAY_PINS:
-            GPIO.output(pin, GPIO.HIGH)
-            time.sleep(1)
             GPIO.output(pin, GPIO.LOW)
+            time.sleep(1)
+            GPIO.output(pin, GPIO.HIGH)
             time.sleep(1)
 
 except KeyboardInterrupt:
