@@ -107,15 +107,13 @@ def nativity_lights():
         # wisemen
         time.sleep(5.5)
         GPIO.output(RELAY_PINS[2], GPIO.LOW)
-        # joseph and mary
-        time.sleep(4.79)
         GPIO.output(RELAY_PINS[1], GPIO.LOW)
-        # jesus
-        time.sleep(4.54)
+        # joseph and mary
+        time.sleep(9)
         GPIO.output(RELAY_PINS[0], GPIO.LOW)
-        time.sleep(10)
-    for pin in RELAY_PINS:
-            GPIO.output(pin, GPIO.HIGH)
+        time.sleep(75)
+        for pin in RELAY_PINS:
+                GPIO.output(pin, GPIO.HIGH)
     print("Nativity Lights Stopped.")
 
 def start_nativity_threads():
