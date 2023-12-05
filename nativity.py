@@ -24,6 +24,7 @@ lights_thread = None
 
 # audio to play with lights
 audio_file = "ChristmasTrain2.mp3"  
+lightsOff=True
 
 # Set up GPIO
 GPIO.setmode(GPIO.BCM)
@@ -38,6 +39,7 @@ for pin in RELAY_PINS:
 def lights_off():
     for pin in RELAY_PINS:
         GPIO.output(pin, GPIO.HIGH)
+    lightsOff=True
 lights_off()
 
 # 
@@ -66,37 +68,43 @@ def play_audio(file_path):
 def nativity_lights():
     # light control loop
     while not stop_event.is_set():
-
+        lightsOff=False
+        print("star")
         # star
         GPIO.output(RELAY_PINS[7], GPIO.LOW)
         if stop_event.is_set():
                 break
         time.sleep(27.95)
 
+        print("donkey")
         # donkey
         GPIO.output(RELAY_PINS[6], GPIO.LOW)
         if stop_event.is_set():
                 break
         time.sleep(11.12)
 
+        print("camel")
         # camel
         GPIO.output(RELAY_PINS[5], GPIO.LOW)
         if stop_event.is_set():
                 break
         time.sleep(4.66)
 
+        print("lamb")
         # lamb
         GPIO.output(RELAY_PINS[4], GPIO.LOW)
         if stop_event.is_set():
                 break
         time.sleep(5.73)
 
+        print("cow")
         # cow
         GPIO.output(RELAY_PINS[3], GPIO.LOW)
         if stop_event.is_set():
                 break
         time.sleep(5.5)
 
+        print("wisemen")
         # wisemen
         GPIO.output(RELAY_PINS[2], GPIO.LOW)
         GPIO.output(RELAY_PINS[1], GPIO.LOW)
@@ -104,12 +112,13 @@ def nativity_lights():
                 break
         time.sleep(9)
 
+        print("joseph and mary")
         # joseph and mary
         GPIO.output(RELAY_PINS[0], GPIO.LOW)
+        time.sleep(65)
         stop_event.set()
     
     # turn off lights
-    lights_off()
     print("Nativity Lights Stopped.")
 
 # 

@@ -25,6 +25,8 @@ try:
             if server.state_value=='1' or server.state_value == '3' or server.state_value == '4':
                 print("State value received:", server.state_value)
                 nativity.stop_event.set()
+                if nativity.lightsOff == False:
+                    nativity.lights_off()
 
             # Nativity Triggered
             elif server.state_value=='2':
