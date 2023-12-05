@@ -48,6 +48,9 @@ class CustomHandler(http.server.SimpleHTTPRequestHandler):
         # Send response
         self.send_response(200)
         self.send_header('Content-type', 'text/plain')
+        self.send_header('Access-Control-Allow-Origin', '*') # Allows all origins
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'X-Requested-With')
         self.end_headers()
         self.wfile.write(response_text)
 
