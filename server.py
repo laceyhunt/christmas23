@@ -72,6 +72,7 @@ server_thread.start()
 audio_file = "ChristmasTrain2.mp3"  
 clock = time.Clock()
 try:
+    state=None
     while True:
         # Run at 30 FPS
         clock.tick(30)  # I'm using this for hopefully precise timing, but I think you are just using delays.  
@@ -83,12 +84,16 @@ try:
         # Then, after the program runs it would go back to waiting for state 2 again.
         # I will probably also define a 4th state that is "OFF", where the lights are just doing something
         # pretty, or just steady ON, but no audio is playing.
-
+        state=state_value
         # Check the state value
-        if state_value is not None:
-            print("State value received:", state_value)
+        if state is not None:
+            print("State value received:", state)
             # Nativity Triggered
-            if state_value==2:
+            if state==1:
+                print("Hello, ")
+                time.sleep(1)
+                print ("World")
+            elif state_value==2:
                 pygame.mixer.init()
                 pygame.mixer.music.load(audio_file)
                 pygame.mixer.music.play()
@@ -105,7 +110,9 @@ try:
             elif state_value==4:
                 for pin in RELAY_PINS:
                     GPIO.output(pin,GPIO.HIGH)
-            state_value = None
+            # state_value = None
+            state=None
+
 
 except KeyboardInterrupt:
     print("Pygame loop interrupted")
