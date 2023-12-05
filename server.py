@@ -89,7 +89,7 @@ try:
         if state_value is not None:
             print("State value received:", state_value)
             # Nativity Triggered
-            if state=='1':
+            if state_value=='1':
                 print("Hello, ")
                 time.sleep(1)
                 print ("World")
