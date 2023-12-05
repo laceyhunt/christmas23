@@ -66,6 +66,7 @@ def play_audio(file_path):
 #   control nativity lights while stop_event is not set
 #   
 def nativity_lights():
+    global lightsOff
     # light control loop
     while not stop_event.is_set():
         lightsOff=False
