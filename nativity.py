@@ -123,12 +123,14 @@ def start_nativity_threads():
     stop_event.clear()
 
     # initialize and start threads
-    audio_thread = threading.Thread(target=play_audio, args=(audio_file,))
+    # audio_thread = threading.Thread(target=play_audio, args=(audio_file,))
     lights_thread = threading.Thread(target=nativity_lights)
-    audio_thread.start()
+    # audio_thread.start()
     lights_thread.start()
 
-    return audio_thread,lights_thread
+    # return audio_thread,lights_thread
+    return lights_thread
+
 
 # 
 # stop_nativity_threads()->None
@@ -141,7 +143,7 @@ def stop_nativity_threads():
     stop_event.set()
 
     # join threads if they exist
-    if audio_thread is not None:
-        audio_thread.join()
+    # if audio_thread is not None:
+    #     audio_thread.join()
     if lights_thread is not None:
         lights_thread.join()

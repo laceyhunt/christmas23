@@ -17,9 +17,11 @@ server_thread.start()
 # Pygame loop
 try:
     server.state_value=None
+    last_state=None
     while True:
         # Check the state value
         if server.state_value is not None:
+            last_state=server.state_value
 
             # Tunnels going or Standby
             if server.state_value=='1' or server.state_value == '3' or server.state_value == '4':
@@ -28,10 +30,11 @@ try:
 
             # Nativity Triggered
             elif server.state_value=='2':
-                print("State value received:", server.state_value)
-                nativity.stop_nativity_threads()
-                nativity.audio_thread, nativity.lights_thread = nativity.start_nativity_threads()
-            
+                if(last_state!=server.state_value):
+                    print("State value received:", server.state_value)
+                    nativity.stop_nativity_threads()
+                    # nativity.audio_thread, nativity.lights_thread = nativity.start_nativity_threads()
+                    nativity.lights_thread = nativity.start_nativity_threads()
             # Reset state value
             server.state_value = None
 
