@@ -72,7 +72,7 @@ server_thread.start()
 
 # Pygame loop - put all the normal PYGAME stuff in here
 audio_file = "ChristmasTrain2.mp3"  
-clock = time.Clock()
+# clock = time.Clock()
 try:
     state_value=None
     while True:
