@@ -25,30 +25,44 @@ def play_mp3(file_path):
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(30)  # Adjust the tick rate as needed
     pygame.mixer.quit()
-    for pin in RELAY_PINS:
-            GPIO.output(pin, GPIO.HIGH)
 
 def nativity_lights():
-    time.sleep(27.95)
-    GPIO.output(RELAY_PINS[7], GPIO.LOW)
-    time.sleep(11.12)
-    GPIO.output(RELAY_PINS[6], GPIO.LOW)
-    time.sleep(4.66)
-    GPIO.output(RELAY_PINS[5], GPIO.LOW)
-    time.sleep(5.73)
-    GPIO.output(RELAY_PINS[4], GPIO.LOW)
-    time.sleep(5.5)
-    GPIO.output(RELAY_PINS[3], GPIO.LOW)
-    time.sleep(5.36)
-    GPIO.output(RELAY_PINS[2], GPIO.LOW)
-    time.sleep(2.79)
-    GPIO.output(RELAY_PINS[1], GPIO.LOW)
-    time.sleep(6.54)
-    GPIO.output(RELAY_PINS[0], GPIO.LOW)
+    global running
+    try:
+        while running:
+            # star
+            GPIO.output(RELAY_PINS[7], GPIO.LOW)
+            # donkey
+            time.sleep(27.95)
+            GPIO.output(RELAY_PINS[6], GPIO.LOW)
+            # camel
+            time.sleep(11.12)
+            GPIO.output(RELAY_PINS[5], GPIO.LOW)
+            # lamb
+            time.sleep(4.66)
+            GPIO.output(RELAY_PINS[4], GPIO.LOW)
+            # cow
+            time.sleep(5.73)
+            GPIO.output(RELAY_PINS[3], GPIO.LOW)
+            # wisemen
+            time.sleep(5.5)
+            GPIO.output(RELAY_PINS[2], GPIO.LOW)
+            # joseph and mary
+            time.sleep(2.79)
+            GPIO.output(RELAY_PINS[1], GPIO.LOW)
+            # jesus
+            time.sleep(6.54)
+            GPIO.output(RELAY_PINS[0], GPIO.LOW)
+            time.sleep(125.71)
+    finally:
+        for pin in RELAY_PINS:
+                GPIO.output(pin, GPIO.HIGH)
+
 
 def signal_handler(signal,frame):
     global running
     running=False
+    GPIO.cleanup()
     sys.exit(0)
 
 if __name__ == "__main__":
@@ -57,15 +71,21 @@ if __name__ == "__main__":
         audio_thread = threading.Thread(target=play_mp3, args=(mp3_file,))
         lights_thread = threading.Thread(target=nativity_lights)
         
-        lights_thread.start()
         audio_thread.start()
-
+        lights_thread.start()
+        
         signal.signal(signal.SIGINT,signal_handler)
 
-        lights_thread.join()
+        audio_thread.join()
+
     except KeyboardInterrupt:
         print("Script interrupted")
-        GPIO.cleanup()
+    except Exception as e:
+        print(f"Unexpected error: {e}")
     finally:
-        running = False  # Stop the audio thread
-        audio_thread.join()  # Wait for the audio thread to finish
+        running = False  # Stop the lights thread
+        lights_thread.join()  # Wait for the lights thread to finish
+        # audio_thread.join()  # Wait for the audio thread to finish
+        # Clean up GPIO
+        GPIO.cleanup()
+        
