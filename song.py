@@ -62,6 +62,8 @@ def nativity_lights():
 def signal_handler(signal,frame):
     global running
     running=False
+    for pin in RELAY_PINS:
+                GPIO.output(pin, GPIO.HIGH)
     sys.exit(0)
 
 if __name__ == "__main__":
@@ -79,8 +81,6 @@ if __name__ == "__main__":
 
     except KeyboardInterrupt:
         print("Script interrupted")
-        for pin in RELAY_PINS:
-                GPIO.output(pin, GPIO.HIGH)
     except Exception as e:
         print(f"Unexpected error: {e}")
     finally:
