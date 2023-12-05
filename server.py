@@ -86,8 +86,7 @@ try:
 
         # Check the state value
         if state_value is not None:
-            if state_value >0 and state_value <5:
-                print("State value received:", state_value)
+            print("State value received:", state_value)
             # Nativity Triggered
             if state_value==2:
                 pygame.mixer.init()
@@ -102,11 +101,11 @@ try:
                 time.sleep(pygame.mixer.music.get_length())  # Wait for audio to finish
                 pygame.mixer.quit()
                 # reset state_value
-                state_value = None
             # turn off all pins
             elif state_value==4:
                 for pin in RELAY_PINS:
                     GPIO.output(pin,GPIO.HIGH)
+            state_value = None
 
 except KeyboardInterrupt:
     print("Pygame loop interrupted")
