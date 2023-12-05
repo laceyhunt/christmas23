@@ -31,7 +31,7 @@ def play_mp3(file_path):
 def nativity_lights():
     global running
     try:
-        time.sleep(13)
+        time.sleep(14)
         GPIO.output(RELAY_PINS[7], GPIO.LOW)
         time.sleep(14)
         GPIO.output(RELAY_PINS[6], GPIO.LOW)
@@ -67,9 +67,7 @@ if __name__ == "__main__":
         lights_thread.join()
     except KeyboardInterrupt:
         print("Script interrupted")
+        GPIO.cleanup()
     finally:
         running = False  # Stop the audio thread
         audio_thread.join()  # Wait for the audio thread to finish
-
-        # Clean up GPIO
-        GPIO.cleanup()
