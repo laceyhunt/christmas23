@@ -14,10 +14,10 @@ RELAY_PINS = [17, 18, 27, 22, 23, 24, 25, 4]  # Adjust these pins according to y
 
 for pin in RELAY_PINS:
     GPIO.setup(pin, GPIO.OUT)
-GPIO.setup(PIR_PIN, GPIO.IN)
+    GPIO.output(pin, GPIO.HIGH)
 
 # Load the audio file
-audio_file = "your_audio_file.mp3"  # Replace with the path to your audio file
+audio_file = "ChristmasTrain2.mp3"  
 
 # Function to control relays based on PIR sensor trigger
 def control_relays():
@@ -29,13 +29,13 @@ def control_relays():
             pygame.mixer.music.play()
 
             for pin in RELAY_PINS:
-                GPIO.output(pin, GPIO.HIGH)
+                GPIO.output(pin, GPIO.LOW)
 
             time.sleep(pygame.mixer.music.get_length())  # Wait for audio to finish
             pygame.mixer.quit()
 
             for pin in RELAY_PINS:
-                GPIO.output(pin, GPIO.LOW)
+                GPIO.output(pin, GPIO.HIGH)
 
             time.sleep(2)  # Add a delay to prevent rapid re-triggering
 
