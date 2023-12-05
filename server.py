@@ -3,7 +3,9 @@ import http.server
 import socketserver
 import urllib
 import RPi.GPIO as GPIO
-from pygame import time
+# from pygame import time
+import pygame
+import time
 
 # LACEY
 # If you run this script on the PI, and then send it a http request from a computer on the same network,
@@ -75,7 +77,7 @@ try:
     state_value=None
     while True:
         # Run at 30 FPS
-        clock.tick(30)  # I'm using this for hopefully precise timing, but I think you are just using delays.  
+        # clock.tick(30)  # I'm using this for hopefully precise timing, but I think you are just using delays.  
 
         # LACEY
         # I was thinking that there would be 3 "states", corresponding to each of the songs.
