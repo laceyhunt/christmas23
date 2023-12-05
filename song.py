@@ -25,6 +25,8 @@ def play_mp3(file_path):
     while pygame.mixer.music.get_busy():
         pygame.time.Clock().tick(30)  # Adjust the tick rate as needed
     pygame.mixer.quit()
+    for pin in RELAY_PINS:
+            GPIO.output(pin, GPIO.HIGH)
 
 def nativity_lights():
     global running
@@ -35,19 +37,16 @@ def nativity_lights():
         GPIO.output(RELAY_PINS[6], GPIO.LOW)
         time.sleep(11)
         GPIO.output(RELAY_PINS[5], GPIO.LOW)
-        time.sleep(5)
+        time.sleep(6)
         GPIO.output(RELAY_PINS[4], GPIO.LOW)
-        time.sleep(5)
+        time.sleep(6)
         GPIO.output(RELAY_PINS[3], GPIO.LOW)
-        time.sleep(2)
+        time.sleep(3)
         GPIO.output(RELAY_PINS[2], GPIO.LOW)
-        time.sleep(7)
+        time.sleep(8)
         GPIO.output(RELAY_PINS[1], GPIO.LOW)
-        time.sleep(13)
+        time.sleep(14)
         GPIO.output(RELAY_PINS[0], GPIO.LOW)
-    finally:
-        for pin in RELAY_PINS:
-            GPIO.output(pin, GPIO.HIGH)
 
 def signal_handler(signal,frame):
     global running
