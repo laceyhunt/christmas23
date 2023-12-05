@@ -21,8 +21,6 @@ try:
     while True:
         # Check the state value
         if server.state_value is not None:
-            last_state=server.state_value
-
             # Tunnels going or Standby
             if server.state_value=='1' or server.state_value == '3' or server.state_value == '4':
                 print("State value received:", server.state_value)
@@ -36,6 +34,8 @@ try:
                     # nativity.audio_thread, nativity.lights_thread = nativity.start_nativity_threads()
                     nativity.lights_thread = nativity.start_nativity_threads()
             # Reset state value
+            
+            last_state=server.state_value
             server.state_value = None
 
 # Keyboard Interrupt
