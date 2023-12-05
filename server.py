@@ -86,7 +86,8 @@ try:
 
         # Check the state value
         if state_value is not None:
-            print("State value received:", state_value)
+            if state_value >0 and state_value <5:
+                print("State value received:", state_value)
             # Nativity Triggered
             if state_value==2:
                 pygame.mixer.init()
