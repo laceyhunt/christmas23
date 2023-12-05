@@ -62,7 +62,6 @@ def nativity_lights():
 def signal_handler(signal,frame):
     global running
     running=False
-    GPIO.cleanup()
     sys.exit(0)
 
 if __name__ == "__main__":
@@ -86,6 +85,6 @@ if __name__ == "__main__":
         running = False  # Stop the lights thread
         lights_thread.join()  # Wait for the lights thread to finish
         # audio_thread.join()  # Wait for the audio thread to finish
-        # Clean up GPIO
-        GPIO.cleanup()
+        GPIO.cleanup()# Clean up GPIO
+        
         
