@@ -81,14 +81,11 @@ server_thread.start()
 def play_audio(file_path):
     pygame.mixer.init()
     pygame.mixer.music.load(file_path)
-
-    while not stop_event.is_set():
-        pygame.mixer.music.play()
-
-        # Wait for the audio to finish
-        while pygame.mixer.music.get_busy() and not stop_event.is_set():
-            pygame.time.Clock().tick(30)  # Adjust the tick rate as needed
-        pygame.mixer.quit()
+    pygame.mixer.music.play()
+    # Wait for the audio to finish
+    while pygame.mixer.music.get_busy() and not stop_event.is_set():
+        pygame.time.Clock().tick(30)  # Adjust the tick rate as needed
+    pygame.mixer.quit()
     print("Nativity Sound stopped.")
 
 def nativity_lights():
@@ -111,12 +108,12 @@ def nativity_lights():
         time.sleep(5.5)
         GPIO.output(RELAY_PINS[2], GPIO.LOW)
         # joseph and mary
-        time.sleep(2.79)
+        time.sleep(4.79)
         GPIO.output(RELAY_PINS[1], GPIO.LOW)
         # jesus
-        time.sleep(6.54)
+        time.sleep(4.54)
         GPIO.output(RELAY_PINS[0], GPIO.LOW)
-        time.sleep(125.71)
+        time.sleep(10)
     for pin in RELAY_PINS:
             GPIO.output(pin, GPIO.HIGH)
     print("Nativity Lights Stopped.")
@@ -174,9 +171,9 @@ try:
                 print("State value received:", state_value)
                 stop_nativity_threads()
                 audio_thread,lights_thread=start_nativity_threads()
-                lights_thread.join()
-                audio_thread.join()
-                stop_event.set()
+                # lights_thread.join()
+                # audio_thread.join()
+                # stop_event.set()
 
             # Standby
             elif state_value=='4':
