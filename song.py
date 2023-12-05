@@ -29,24 +29,22 @@ def play_mp3(file_path):
             GPIO.output(pin, GPIO.HIGH)
 
 def nativity_lights():
-    global running
-    try:
-        time.sleep(14)
-        GPIO.output(RELAY_PINS[7], GPIO.LOW)
-        time.sleep(14)
-        GPIO.output(RELAY_PINS[6], GPIO.LOW)
-        time.sleep(11)
-        GPIO.output(RELAY_PINS[5], GPIO.LOW)
-        time.sleep(6)
-        GPIO.output(RELAY_PINS[4], GPIO.LOW)
-        time.sleep(6)
-        GPIO.output(RELAY_PINS[3], GPIO.LOW)
-        time.sleep(3)
-        GPIO.output(RELAY_PINS[2], GPIO.LOW)
-        time.sleep(8)
-        GPIO.output(RELAY_PINS[1], GPIO.LOW)
-        time.sleep(14)
-        GPIO.output(RELAY_PINS[0], GPIO.LOW)
+    time.sleep(14)
+    GPIO.output(RELAY_PINS[7], GPIO.LOW)
+    time.sleep(14)
+    GPIO.output(RELAY_PINS[6], GPIO.LOW)
+    time.sleep(11)
+    GPIO.output(RELAY_PINS[5], GPIO.LOW)
+    time.sleep(6)
+    GPIO.output(RELAY_PINS[4], GPIO.LOW)
+    time.sleep(6)
+    GPIO.output(RELAY_PINS[3], GPIO.LOW)
+    time.sleep(3)
+    GPIO.output(RELAY_PINS[2], GPIO.LOW)
+    time.sleep(8)
+    GPIO.output(RELAY_PINS[1], GPIO.LOW)
+    time.sleep(14)
+    GPIO.output(RELAY_PINS[0], GPIO.LOW)
 
 def signal_handler(signal,frame):
     global running
