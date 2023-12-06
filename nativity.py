@@ -108,13 +108,13 @@ def nativity_lights():
         print("wisemen")
         # wisemen
         GPIO.output(RELAY_PINS[2], GPIO.LOW)
-        GPIO.output(RELAY_PINS[1], GPIO.LOW)
         if stop_event.is_set():
                 break
         time.sleep(9)
 
         print("joseph and mary")
         # joseph and mary
+        GPIO.output(RELAY_PINS[1], GPIO.LOW)
         GPIO.output(RELAY_PINS[0], GPIO.LOW)
         time.sleep(65)
         stop_event.set()
