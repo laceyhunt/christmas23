@@ -37,10 +37,21 @@ for pin in RELAY_PINS:
 #   set all GPIO pins in RELAY_PINS to off
 #
 def lights_off():
+    global lightsOff
     for pin in RELAY_PINS:
         GPIO.output(pin, GPIO.HIGH)
     lightsOff=True
 lights_off()
+
+# 
+# lights_on()->None
+#   set all GPIO pins in RELAY_PINS to on
+#
+def lights_on():
+    global lightsOff
+    for pin in RELAY_PINS:
+        GPIO.output(pin, GPIO.LOW)
+    lightsOff=False
 
 # 
 # play_audio(string)->None
@@ -67,7 +78,10 @@ def play_audio(file_path):
 #   
 def nativity_lights():
     global lightsOff
-    # light control loop
+    # turn lights off if not off already
+    if lightsOff == False:
+        lights_off()
+    # light control loop    
     while not stop_event.is_set():
         lightsOff=False
         print("star")
@@ -116,7 +130,6 @@ def nativity_lights():
         # joseph and mary
         GPIO.output(RELAY_PINS[1], GPIO.LOW)
         GPIO.output(RELAY_PINS[0], GPIO.LOW)
-        time.sleep(65)
         stop_event.set()
     
     # turn off lights

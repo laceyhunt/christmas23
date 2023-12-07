@@ -15,7 +15,7 @@
 #       :8000 specifies the port, and the ?state=7 is just a
 #       "get" request which can be parsed out on the server side.
 # 
-#   MY PI IP: 192.168.117.114/24
+#   MY PI IP: 172.20.10.14/24
 # 
 
 import http.server

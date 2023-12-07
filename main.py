@@ -21,13 +21,12 @@ try:
     while True:
         # Check the state value
         if server.state_value is not None:
-            # Tunnels going or Standby
-            if server.state_value=='1' or server.state_value == '3' or server.state_value == '4':
+            # Tunnel 1 or Standby LIGHTS OFF 
+            if server.state_value == '1' or server.state_value == '4':
                 print("State value received:", server.state_value)
                 nativity.stop_event.set()
                 if nativity.lightsOff == False:
                     nativity.lights_off()
-
             # Nativity Triggered
             elif server.state_value=='2':
                 if(last_state!=server.state_value):
@@ -35,8 +34,13 @@ try:
                     nativity.stop_nativity_threads()
                     # nativity.audio_thread, nativity.lights_thread = nativity.start_nativity_threads()
                     nativity.lights_thread = nativity.start_nativity_threads()
+            # Third Tunnel LIGHTS ON
+            elif server.state_value == '3':
+                print("State value received:", server.state_value)
+                nativity.stop_event.set()
+                if nativity.lightsOff == True:
+                    nativity.lights_on()        
             # Reset state value
-            
             last_state=server.state_value
             server.state_value = None
 
